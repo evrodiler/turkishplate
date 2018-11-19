@@ -26,7 +26,7 @@ letters_train = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C'
 letters = sorted(list(letters_train))
 
 #from directory taking all plate numbers
-def datacreate(path,path_true,strx):    
+def datacreate(path,path_true,strx):   
     data=[]
     if path_true:
         start='#'
@@ -34,8 +34,10 @@ def datacreate(path,path_true,strx):
         for filename in os.listdir(path): 
             if filename.find('#')!=-1: #special char found            
                 fname= (filename.split(start))[1].split(end)[0]             
+                #print(fname)
             else:
-                fname= filename.split('.')
+                fname= filename.split('.')[0]
+                #print(fname)
             if (len(fname[0])< 9):    
                 data.append(list(fname))
             else:
@@ -43,7 +45,7 @@ def datacreate(path,path_true,strx):
     else:
         for stri in strx:
             data.append(list(stri))      
-            
+        
     df= pd.DataFrame(data,columns=['1','2','3','4','5','6','7','8'])      
     
     return df
